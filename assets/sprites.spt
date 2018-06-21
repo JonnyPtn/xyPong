@@ -1,0 +1,22 @@
+ 
+{
+    src = "assets/gameicons/Spritesheet/sheet_white2x.png"
+    smooth = false
+    sprite sound_icon
+    {
+        bounds = 0.000000,0.000000,1024.000000,2048.000000
+        colour = 255,255,255,255
+        animation on
+        {
+            framerate = 12.000000
+            loop = false
+            frame = 216.000000,1420.000000,72.000000,72.000000
+        }
+        animation off
+        {
+            framerate = 12.000000
+            loop = false
+            frame = 216.000000,1520.000000,72.000000,72.000000
+        }
+    }
+}
