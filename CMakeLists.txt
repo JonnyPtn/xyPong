@@ -67,11 +67,7 @@ else(APPLE)
     add_executable(${PROJECT_NAME} ${PROJECT_SRC})
 endif()
 
-# Linker settings
-target_link_libraries(${PROJECT_NAME}
-  ${SFML_LIBRARIES}
-  ${SFML_DEPENDENCIES}
-  ${XYXT_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-audio ${XYXT_LIBRARIES})
 
 if(X11_FOUND)
   target_link_libraries(${PROJECT_NAME}

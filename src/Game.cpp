@@ -32,6 +32,7 @@ source distribution.
 #include "States.hpp"
 #include "MainMenuState.hpp"
 #include "PlayingState.hpp"
+#include "PauseState.hpp"
 
 Game::Game()
 : xy::App   (sf::ContextSettings(),"Pong"),
@@ -78,4 +79,5 @@ void Game::registerStates()
     m_stateStack.registerState<MainMenuState>(States::MAIN_MENU);
     m_stateStack.registerState<PlayingState>(States::SINGLE_PLAYER, true);
     m_stateStack.registerState<PlayingState>(States::TWO_PLAYER, false);
+    m_stateStack.registerState<PauseState>(States::PAUSED);
 }

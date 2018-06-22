@@ -13,6 +13,7 @@
 #include <xyginext/core/Editor.hpp>
 
 #include <SFML/Window/Mouse.hpp>
+#include <SFML/Window/Event.hpp>
 
 // Entity ID's from the editor.
 namespace
@@ -38,6 +39,20 @@ m_singlePlayer(singlePlayer)
 
 bool PlayingState::handleEvent(const sf::Event &evt)
 {
+    switch(evt.type)
+    {
+        case sf::Event::KeyPressed:
+        {
+            switch(evt.key.code)
+            {
+                case sf::Keyboard::P:
+                case sf::Keyboard::Escape:
+                requestStackPush(States::PAUSED);
+                return true;
+            }
+        }
+    }
+    
     m_scene.forwardEvent(evt);
     return true;
 }
@@ -54,7 +69,7 @@ bool PlayingState::update(float dt)
     
     const auto paddleSpeed = 500.f;
     
-    // Handle Input
+    // Handle movement input
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
     {
         playerOne.getComponent<xy::Transform>().move(0.f, -paddleSpeed * dt);
@@ -63,13 +78,16 @@ bool PlayingState::update(float dt)
     {
         playerOne.getComponent<xy::Transform>().move(0.f, paddleSpeed * dt);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    if (!m_singlePlayer)
     {
-        playerTwo.getComponent<xy::Transform>().move(0.f, -paddleSpeed * dt);
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-    {
-        playerTwo.getComponent<xy::Transform>().move(0.f, paddleSpeed * dt);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            playerTwo.getComponent<xy::Transform>().move(0.f, -paddleSpeed * dt);
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            playerTwo.getComponent<xy::Transform>().move(0.f, paddleSpeed * dt);
+        }
     }
     
     // Make sure players don't go off screen
@@ -93,7 +111,7 @@ bool PlayingState::update(float dt)
     
     m_scene.update(dt);
     
-    return false;
+    return true;
 }
 
 void PlayingState::draw()

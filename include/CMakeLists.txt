@@ -4,4 +4,5 @@ set(PROJECT_SRC
   ${CMAKE_CURRENT_SOURCE_DIR}/States.hpp
   ${CMAKE_CURRENT_SOURCE_DIR}/MainMenuState.hpp
   ${CMAKE_CURRENT_SOURCE_DIR}/PlayingState.hpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/PauseState.hpp
   PARENT_SCOPE)
